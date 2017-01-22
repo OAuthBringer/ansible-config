@@ -15,6 +15,7 @@ brew_formulas:
   - autoenv
   - openssl
   - lastpass-cli
+  - reattach-to-user-namespace  
 
 brew_casks:
   - google-chrome
