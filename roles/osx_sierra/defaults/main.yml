@@ -1,0 +1,23 @@
+brew_install: false
+
+brew_taps:
+  - homebrew/dupes
+
+brew_formulas:
+  - git
+  - terraform
+  - vim
+  - bash
+  - coreutils
+  - autoenv
+  - openssl
+  - lastpass-cli
+
+brew_casks:
+  - google_chrome
+  - slack
+  - virtualbox
+  - vagrant  
+  - atom
+
+

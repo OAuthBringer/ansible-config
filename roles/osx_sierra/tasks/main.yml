@@ -1,0 +1,5 @@
+--
+
+- name: Use brew to install core
+  include: brew.yml
+  when: brew_install

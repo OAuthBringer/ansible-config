@@ -1,0 +1,23 @@
+--
+
+- name: Install brew 
+  command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+- name: Update taps
+  homebrew_taps:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ brew_taps }}"
+
+- name: Brew formulas 
+  homebrew:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ brew_formulas }}"
+
+- name: Brew casks
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ brew_casks }}"
+
