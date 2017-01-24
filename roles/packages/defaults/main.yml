@@ -1,0 +1,47 @@
+# Personal shell config
+shellrc_version: updates 
+shellrc_url: "https://github.com/neolytics/shellrc/archive/{{ shellrc_version }}.zip" 
+shellrc_archive_dest: "~/shellrc.zip"
+shellrc_dest: "~/"
+
+shellrc_obj:
+  url: "{{ shellrc_url }}"
+  dest: "{{ shellrc_archive_dest }}"
+  mode: "u+rwx"
+
+shellrc_unarchive_obj: 
+  src: "{{ shellrc_archive_dest }}"
+  dest: "{{ shellrc_dest }}"
+
+shellrc_command:
+  - "~/shellrc-{{ shellrc_version }}/install.sh"
+
+# Zsh shell config
+zsh_version: master
+zsh_url: "https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/{{ zsh_version }}/tools/install.sh"
+zsh_install: "~/zsh_install.sh"
+zsh_obj:
+  url: "{{ zsh_url }}"
+  dest: "{{ zsh_install }}"
+  mode: "u+rwx"
+
+zsh_command:
+  - bash -c '{{ zsh_install }}; sudo chsh -s /usr/bin/zsh {{ packages_user }}'
+
+shell_curl_objs:
+  - "{{ shellrc_obj }}"
+  - "{{ zsh_obj }}"
+
+shell_unarchive_objs:
+  - "{{ shellrc_unarchive_obj }}"
+
+shell_command_objs:
+  - "{{ zsh_command }}" # Make sure to install zsh first
+  - "{{ shellrc_command }}"
+
+shell_cleanup_objs:
+  - "{{ shellrc_archive_dest }}"
+  - "{{ zsh_install }}"
+
+shell_files: []
+
