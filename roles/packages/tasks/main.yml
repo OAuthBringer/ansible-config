@@ -1,0 +1,41 @@
+---
+
+- name: Retrieve files and packages from remote urls
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  become_user: "{{ packages_user }}"  
+  with_items: "{{ shell_curl_objs }}" 
+  when: "{{ shell_curl_objs }}"
+
+- name: Unarchive any packages
+  unarchive:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    remote_src: true
+  become_user: "{{ packages_user }}"  
+  with_items: "{{ shell_unarchive_objs }}" 
+  when: "{{ shell_unarchive_objs }}"
+
+- name: Issue any necessary install/configuration commands 
+  command: "{{ item }}"
+  become_user: "{{ packages_user }}"
+  with_items: "{{ shell_command_objs }}" 
+  when: "{{ shell_command_objs }}"
+
+- name: Copy over any local files that should be duplicated
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  become_user: "{{ packages_user }}"
+  with_items: "{{ shell_files }}" 
+  when: "{{ shell_files }}"
+
+- name: Cleanup any configuration artifacts
+  file:
+    path: "{{ item }}" 
+    state: absent
+  with_items: "{{ shell_cleanup_objs }}" 
+  become_user: "{{ packages_user }}"
+  when: "{{ shell_cleanup_objs }}"

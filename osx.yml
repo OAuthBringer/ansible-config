@@ -1,0 +1,10 @@
+---
+
+- hosts: localhost
+  vars:
+    version: 0.1.0
+  vars_files:
+    - config.yml
+  roles:
+    - homebrew
+    - packages

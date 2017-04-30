@@ -1,4 +1,7 @@
+---
+
 brew_install: false
+brew_configure: false
 
 brew_taps:
   - homebrew/dupes
@@ -12,12 +15,14 @@ brew_formulas:
   - autoenv
   - openssl
   - lastpass-cli
+  - reattach-to-user-namespace  
 
 brew_casks:
-  - google_chrome
+  - google-chrome
   - slack
   - virtualbox
   - vagrant  
+  - karabiner-elements
   - atom
 
 

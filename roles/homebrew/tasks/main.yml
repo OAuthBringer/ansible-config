@@ -1,0 +1,9 @@
+---
+
+- name: Install homebrew
+  include: install.yml
+  when: brew_install
+
+- name: Configure formulas, casks, and taps
+  include: configure.yml
+  when: brew_configure
