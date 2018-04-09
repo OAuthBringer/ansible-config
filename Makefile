@@ -8,5 +8,5 @@ get:
 	curl -Lo ansible-config.zip https://github.com/neolytics/ansible-config/archive/master.zip 
 
 osx:
-	ansible-playbook osx.yml
+	ansible-playbook osx.yml --extra-vars='packages_user=$(USER)'
 
